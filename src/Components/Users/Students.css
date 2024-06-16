@@ -1,16 +1,39 @@
-.student-card {
+.card-img-container {
+    position: relative;
     width: 100%;
-    transition: transform 0.2s;
-  }
-  
-  .student-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .card-img-top {
-    width: 150px;
-    height: 150px;
+    padding-bottom: 133.33%;
+    /* 3:4 aspect ratio */
+    overflow: hidden;
+}
+
+.card-img-container img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 50%;
-  }
-  
+    transition: filter 0.3s ease;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card-img-container:hover img {
+    filter: blur(5px);
+}
+
+.card-img-container:hover .card-overlay {
+    opacity: 1;
+}
