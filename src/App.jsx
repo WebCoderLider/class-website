@@ -1,14 +1,15 @@
 import React from 'react'
-import Navbar from './Components/Navbar/Navbar'
-import Header from './Components/Header/Header'
-import Teachers from './Components/Teachers/Teachers'
+import { Route, Routes } from 'react-router-dom'
+import Home from './Components/Home'
+import Users from './Components/Users/Users'
 
 function App() {
   return (
     <div>
-      <Navbar />
-      <Header />
-      <Teachers />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/users' element={<Users />} />
+      </Routes>
     </div>
   )
 }
