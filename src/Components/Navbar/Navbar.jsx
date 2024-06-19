@@ -6,7 +6,7 @@ function Navbar() {
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light position-fixed w-100 px-5 shadow-sm" style={{ 'zIndex': '9999999' }}>
-                <Link className="navbar-brand fw-bold fs-5" to="/" style={{ background: 'black', color: 'white', borderRadius: '78% 19% 67% 64% / 100% 0% 77% 0% ', padding: '10px' }} > 11 - A</Link>
+                <Link className="navbar-brand fw-bold fs-5 logofontuchun" to="/" style={{ background: 'black', color: 'white', borderRadius: '78% 19% 67% 64% / 100% 0% 77% 0% ', padding: '10px' }} > 11 - D</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
