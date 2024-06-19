@@ -3,11 +3,11 @@ import './News.css';
 import Navbar from '../Navbar/Navbar';
 import axios from 'axios';
 
-function News() {
+function News2() {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    axios.get('https://api.11school11d.uz/news')
+    axios.get('https://api.11school11d.uz/news2')
       .then(res => setNews(res.data))
       .catch(err => alert(err.message));
   }, []);
@@ -48,4 +48,4 @@ function News() {
   );
 }
 
-export default News;
+export default News2;

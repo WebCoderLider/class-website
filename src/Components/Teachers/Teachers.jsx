@@ -1,64 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Teachers.css';
-
-const teachers = [
-  {
-    name: 'Toshpolatov Toshmamat',
-    subject: 'Matematika',
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVjakdlwjqHkqRZ7MX0n6gGR5ZF5T2IHv1-A&s'
-  },
-  {
-    name: 'Alisher Alisherov',
-    subject: 'Informatika',
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEHrPwIPqCNDPc8Yb_t6_WvH839-3h8M4RzQ&s'
-  },
-  {
-    name: 'Zaynabjon Zaynapova',
-    subject: 'Ona tili',
-    image: 'https://img.lovepik.com/element/40113/3290.png_300.png'
-  },
-  {
-    name: 'Saida Saidova',
-    subject: 'Ingiliz tili',
-    image: 'https://img.lovepik.com/photo/20230421/medium/lovepik-old-female-english-teacher-and-students-in-the-classroom-photo-image_352156615.jpg'
-  }
-];
+import axios from 'axios';
 
 function Teachers() {
+  const [teachers, setTeachers] = useState([])
+  const [MainTeachers, setMainTeachers] = useState([])
+  useEffect(() => {
+    axios.get('https://api.11school11d.uz/teachers')
+      .then(res => setTeachers(res.data))
+      .catch(err => alert(err.message))
+  }, [])
+  useEffect(() => {
+    axios.get('https://api.11school11d.uz/main-teachers')
+      .then(res => setMainTeachers(res.data))
+      .catch(err => alert(err.message))
+  }, [])
   return (
     <div id="teachers" className="container my-5 py-5">
       <h2 className="text-center mb-5">O'qituvchilar</h2>
 
       <div className="d-flex justify-content-center row">
-        <div className="col-lg-3 col-md-4 col-sm-6 mb-4 mx-2">
-          <div className="card teacher-card shadow-sm">
-            <img src={'https://img.lovepik.com/photo/20230421/medium/lovepik-old-female-english-teacher-and-students-in-the-classroom-photo-image_352156615.jpg'} className="card-img-top rounded-circle mx-auto mt-3" />
-            <div className="card-body text-center">
-              <h5 className="card-title">Ra'no Ra'noeva</h5>
-              <p className="card-text">Direktorimz</p>
+        {
+          MainTeachers ? MainTeachers.map(el => (
+            <div className="col-lg-3 col-md-4 col-sm-6 mb-4 mx-2">
+              <div className="card teacher-card shadow-sm">
+                <img src={`https://api.11school11d.uz${el.image_url}`} className="card-img-top rounded-circle mx-auto mt-3" />
+                <div className="card-body text-center">
+                  <h5 className="card-title">{el.name}</h5>
+                  <p className="card-text">{el.subject}</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div className="col-lg-3 col-md-4 col-sm-6 mb-4 mx-2">
-          <div className="card teacher-card shadow-sm">
-            <img src={'https://img.lovepik.com/photo/20230421/medium/lovepik-old-female-english-teacher-and-students-in-the-classroom-photo-image_352156615.jpg'} className="card-img-top rounded-circle mx-auto mt-3" />
-            <div className="card-body text-center">
-              <h5 className="card-title">Ra'no Ra'noeva</h5>
-              <p className="card-text">Sinf raxbari</p>
-            </div>
-          </div>
-        </div>
+          )) : ""
+        }
       </div>
 
       <div className="row">
         {teachers.map((teacher, index) => (
           <div className="col-lg-3 col-md-4 col-sm-6 mb-4" key={index}>
             <div className="card teacher-card shadow-sm">
-              <img src={teacher.image} className="card-img-top rounded-circle mx-auto mt-3" alt={teacher.name} />
+              <img src={`https://api.11school11d.uz${teacher.teacher_image}`} className="card-img-top rounded-circle mx-auto mt-3" alt={teacher.name} />
               <div className="card-body text-center">
-                <h5 className="card-title">{teacher.name}</h5>
-                <p className="card-text">{teacher.subject}</p>
+                <h5 className="card-title">{teacher.teacher_name}</h5>
+                <p className="card-text">{teacher.teacher_subject}</p>
               </div>
             </div>
           </div>

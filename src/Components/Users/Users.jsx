@@ -1,37 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 import './Students.css';
+import axios from 'axios';
 
-const studentsData = [
-  {
-    id: 1,
-    name: 'John Doe',
-    age: 18,
-    image: 'https://via.placeholder.com/900'
-  },
-  {
-    id: 2,
-    name: 'Jane Smith',
-    age: 17,
-    image: 'https://via.placeholder.com/900'
-  },
-  {
-    id: 3,
-    name: 'Sam Wilson',
-    age: 19,
-    image: 'https://via.placeholder.com/900'
-  },
-  {
-    id: 4,
-    name: 'Sara Connor',
-    age: 18,
-    image: 'https://via.placeholder.com/900'
-  },
-  // Add more students as needed
-];
+
 
 function Students() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [studentsData, setStudentsData] = useState([])
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -40,7 +16,11 @@ function Students() {
   const filteredStudents = studentsData.filter(student =>
     student.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+  useEffect(() =>{
+    axios.get('https://api.11school11d.uz/childrens')
+    .then(res => setStudentsData(res.data))
+    .catch(err => alert(err.message))
+  },[])
   return (
     <div>
       <Navbar />
@@ -59,7 +39,7 @@ function Students() {
             <div className="col-lg-3 col-md-4 col-sm-6 mb-4" key={student.id}>
               <div className="card h-100 border-0 shadow-sm">
                 <div className="card-img-container">
-                  <img src={student.image} className="card-img-top" alt={student.name} />
+                  <img src={`https://api.11school11d.uz${student.image_url}`} className="card-img-top" alt={student.name} />
                   <div className="card-overlay">
                     <h5>{student.name}</h5>
                     <p>Yosh: {student.age}</p>
